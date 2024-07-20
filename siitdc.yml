@@ -8,7 +8,7 @@ topology:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:23.10.1
       type: ixrd3
-      
+      startup-config: srlsw/config.json
     rtinetipv6:
       kind: linux
       image: quay.io/frrouting/frr:8.4.1
