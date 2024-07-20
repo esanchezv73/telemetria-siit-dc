@@ -3,7 +3,12 @@ name: siitdc2
   
 topology:
   nodes:
-  
+    
+    srl1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:23.10.1
+      type: ixrd3
+      
     rtinetipv6:
       kind: linux
       image: quay.io/frrouting/frr:8.4.1
@@ -23,7 +28,7 @@ topology:
       - ip -6 route del default dev eth0
       - ip -6 addr add 2001:db8:dc::50/64 dev eth1
       - ip -6 route add 2001:db8::/64 via 2001:db8:dc::1
-      - ip -6 addr add 2001:db8:dc::51/64 dev eth2
+      
     SRVSIIT:
       kind: linux
       image: siit-dc:latest
@@ -53,10 +58,11 @@ topology:
       - ip route add default via 10.0.0.1    
       
   links:
-    - endpoints: ["SRV1:eth1", "rtinetipv6:eth1"]
-    - endpoints: ["SRV1:eth2", "SRVSIIT:eth1"]
-    - endpoints: ["SRVSIIT:eth2", "PC2:eth1"]
+    - endpoints: ["SRV1:eth1", "srl1:e1-1"]
+    - endpoints: ["rtinetipv6:eth1", "srl1:e1-2"]
+    - endpoints: ["SRVSIIT:eth1", "srl1:e1-3"]
     - endpoints: ["rtinetipv6:eth2", "PC1:eth1"]
-    
+    - endpoints: ["SRVSIIT:eth2", "PC2:eth1"]
+ 
     
      
