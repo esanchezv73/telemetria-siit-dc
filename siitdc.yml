@@ -21,8 +21,8 @@ topology:
       image: ubuntu2204:latest
       exec:
       - ip -6 route del default dev eth0
-      - ip -6 addr add 2001:db8:34:1::2/64 dev eth1
-      - ip -6 route add default via 2001:db8:34:1::1
+      - ip -6 addr add 2001:db8:dc:50::2/64 dev eth1
+      - ip -6 route add 2001:db8:20::/64 via 2001:db8:dc:50::1
 
     SRVSIIT:
       kind: linux
@@ -30,10 +30,10 @@ topology:
       exec:
        - ip -6 route del default dev eth0
        #- ip route del default dev eth0
-       - ip -6 addr add 2001:db8:34:2::2/64 dev eth1
-       - ip -6 route add default via 2001:db8:34:2::1
-       - ip addr add 192.0.2.2/255.255.255.0 dev eth2
-       - ip route add 203.0.15.0/255.255.255.0 via 192.0.2.1
+       - ip -6 addr add 2001:db8:dc::2/64 dev eth1
+       #- ip -6 route add default via 2001:db8:34:2::1
+       - ip addr add 10.0.0.1/255.255.255.0 dev eth2
+       #- ip route add 203.0.15.0/255.255.255.0 via 192.0.2.1
        - "sysctl -w net.ipv4.ip_forward=1"
        - "sysctl -w net.ipv6.conf.all.forwarding=1"
     PC1:
@@ -41,23 +41,22 @@ topology:
       image: docker.io/wbitt/network-multitool:extra
       exec:
       - ip -6 route del default dev eth0  
-      - ip -6 addr add 2001:db8:ab::2/64 dev eth1
-      - ip -6 route add default via 2001:db8:ab::1
+      - ip -6 addr add 2001:db8::20/64 dev eth1
+      - ip -6 route add default via 2001:db8::1
     PC2:
       kind: linux
       image: docker.io/wbitt/network-multitool:extra
       exec:
       - ip -6 route del default dev eth0
       - ip route del default dev eth0
-      - ip addr add 203.0.15.2/255.255.255.0 dev eth1
-      - ip route add default via 203.0.15.1    
+      - ip addr add 10.0.0.21/255.255.255.0 dev eth1
+      - ip route add default via 10.0.0.1    
       
   links:
-    - endpoints: ["router1:eth1", "SRV1:eth1"]
-    - endpoints: ["router1:eth2", "SRVSIIT:eth1"]
-    - endpoints: ["router1:eth3", "rtinetipv6:eth1"]
+    - endpoints: ["SRV1:eth1", "rtinetipv6:eth1"]
+    - endpoints: ["SRV1:eth2", "SRVSIIT:eth1"]
+    - endpoints: ["SRVSIIT:eth2", "PC2:eth1"]
     - endpoints: ["rtinetipv6:eth2", "PC1:eth1"]
-    - endpoints: ["SRVSIIT:eth2", "rtinetipv4:eth1"]
-    - endpoints: ["rtinetipv4:eth2", "PC2:eth1"]
+    
     
      
