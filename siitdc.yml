@@ -36,7 +36,7 @@ topology:
       
     SRVSIIT:
       kind: linux
-      image: ubuntu:22.04
+      image: esanchezv/siit-dcv2:latest
       exec:
        - ip -6 route del default dev eth0
        
