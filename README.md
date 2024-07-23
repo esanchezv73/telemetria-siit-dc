@@ -25,13 +25,14 @@ Para desplegar la topología propuesta debe disponer de:
 
 * Para acceder a CLI de cada nodo, ejecutar: 
 
-Nodo SRVSIIT:  docker exec -it clab-siitdc2-SRVSIIT /bin/bash
-Nodo SRV1:     docker exec -it clab-siitdc2-SRV1 /bin/bash
-Nodo PC1:      docker exec -it clab-siitdc2-PC1 /bin/bash
-Noso PC2:      docker exec -it clab-siitdc2-PC2 /bin/bash
+* Nodo SRVSIIT:  docker exec -it clab-siitdc2-SRVSIIT /bin/bash
+* Nodo SRV1:     docker exec -it clab-siitdc2-SRV1 /bin/bash
+* Nodo PC1:      docker exec -it clab-siitdc2-PC1 /bin/bash
+* Nodo PC2:      docker exec -it clab-siitdc2-PC2 /bin/bash
 
 ## Descripción del ejemplo de prueba 
-
+La siguiente imagen muestra la topología creada
+![Alt text](images/toposiitdc.png)
 
 
 ## Author
