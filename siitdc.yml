@@ -36,7 +36,7 @@ topology:
       
     SRVSIIT:
       kind: linux
-      image: ubuntu:latest
+      image: ubuntu:22.04
       exec:
        - ip -6 route del default dev eth0
        
