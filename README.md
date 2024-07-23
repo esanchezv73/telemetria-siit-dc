@@ -1,32 +1,36 @@
 # SIIT-DC based in Containerlab
-  Stateless IP/ICMP Translator
+  Stateless IP/ICMP Translator 
 
-## Description
+## Descripción
+La siguiente topología integra un servidor SIIT-DC Jool a Containerlab, que permitirá realizar pruebas basadas en IPv4/IPv6 Translation
 
-## Getting Started
+### Requerimientos de software y SO
 
-### Dependencies
+Para desplegar la topología propuesta debe disponer de:
 
-Prerequisites, libraries, OS version, etc., needed before running lab.
-* 64-bit kernel and CPU support for virtualization.
-* KVM virtualization support.
-* At least 4 GB of RAM.
-* Ubuntu Server 22.04 LTS with Docker engine. (https://docs.docker.com/desktop/install/linux-install/).
-* Containerlab. (https://containerlab.dev/install/).
-* For packet capture: Edgeshark. (https://github.com/siemens/edgeshark). 
-### Installing topology files
+* Dispositivo Host con Containerlab instalado:
+* Sistema Operativo Linux "Ubuntu 22.04.3 LTS". Kernel headers 5.15.0-116-generic
+* Docker Engine - Community Version: 24.0.7
+* Containerlab version: 0.56.0
 
-* Clone repository to a current working directory in ubuntu server: git clone https://github.com/ernestosv73/siitdc2.git
+### Instalación de los archivos de topología
 
-### Executing topology lab
+* Clonar la topología ejecutando: git clone https://github.com/ernestosv73/siitdc2.git
 
-* From directory /ipv6seclab, run the command: clab deploy -t siitdc.yml
+### Deploy de la topología
 
-### Managing nodes
+* Desde el directorio /siitdc2, ejecutar el comando: clab deploy -t siitdc.yml
 
- 
+### Acceso a los nodos
 
-## Test IPv6 Security with Thc-IPv6 Toolkit
+* Para acceder a CLI de cada nodo, ejecutar: 
+
+Nodo SRVSIIT:  docker exec -it clab-siitdc2-SRVSIIT /bin/bash
+Nodo SRV1:     docker exec -it clab-siitdc2-SRV1 /bin/bash
+Nodo PC1:      docker exec -it clab-siitdc2-PC1 /bin/bash
+Noso PC2:      docker exec -it clab-siitdc2-PC2 /bin/bash
+
+## Descripción del ejemplo de prueba 
 
 
 
