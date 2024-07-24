@@ -19,17 +19,16 @@ $ git clone https://github.com/ernestosv73/siitdc2.git
 
 ## Deploy de la topología
 ```console
-user@server:../siitdc2#clab deploy -t siitdc.yml
+root@server:../siitdc2#clab deploy -t siitdc.yml
 ```
 ## Acceso a los nodos
 
-* Para acceder a CLI de cada nodo, ejecutar: 
-
-* Nodo SRVSIIT:  docker exec -it clab-siitdc2-SRVSIIT /bin/bash
-* Nodo SRV1:     docker exec -it clab-siitdc2-SRV1 /bin/bash
-* Nodo PC1:      docker exec -it clab-siitdc2-PC1 /bin/bash
-* Nodo PC2:      docker exec -it clab-siitdc2-PC2 /bin/bash
-
+```console
+root@server:../siitdc2#docker exec -it clab-siitdc2-SRVSIIT /bin/bash
+root@server:../siitdc2#docker exec -it clab-siitdc2-SRV1 /bin/bash
+root@server:../siitdc2#docker exec -it clab-siitdc2-PC1 /bin/bash
+root@server:../siitdc2#docker exec -it clab-siitdc2-PC2 /bin/bash
+```
 ## Descripción del ejemplo de prueba 
 ### Topología creada
 ![Alt text](images/toposiitdc.png)
@@ -42,7 +41,24 @@ user@server:../siitdc2#clab deploy -t siitdc.yml
 
 ### Descripción del ejemplo de prueba: Explicit Address Mappings Table - EAMT
 
-
+* El siguiente ejemplo muestra un caso de implementación de un servidor Jool en modo SIIT para permitir conexión de un cliente IPv4 a un Servidor IPv6 a nivel de capa 3:
+* Desde el contenedor SRVSIIT ejecutar los siguientes comandos:
+```console
+root@SRVSIIT:/#modprobe jool_siit
+root@SRVSIIT:/#jool_siit instance add "lacnic" --netfilter --pool6 64:ff9b::/96
+root@SRVSIIT:/#jool_siit -i "lacnic" eamt add 192.168.0.80/32 2001:db8:dc::50/128
+```
+* Desde el contenedor PC2 probar que se tiene conectividad al servidor SRV1 ejecutando:
+```console
+PC2:/#ping 192.168.0.80
+```
+## Notas
+* La versión de Jool instalada en el contenedor SRVSIIT soporta los modos SIIT, Stateful NAT64 and MAP-T.
+  
+## Referencias
+https://containerlab.dev/
+https://www.jool.mx/en/eamt.html
+https://www.jool.mx/en/run-eam.html
 
 ## Author
 
@@ -57,8 +73,4 @@ linkedin: https://www.linkedin.com/in/ernestos%C3%A1nchez
 
 This project is licensed under the [MIT] License - see the LICENSE.txt file for details
 
-## Acknowledgments
 
-* Alejandro Acosta
-* Henri Alvesde Godoy. henri.godoy@fca.unicamp.br
-* Silvio Lucas da Silva. silvio.lucas@ifpb.edu.br 
