@@ -14,9 +14,9 @@ Para desplegar la topología propuesta debe disponer de:
 * Containerlab version: 0.56.0
 
 ## Instalación de los archivos de topología
-
-$ git clone https://github.com/ernestosv73/siitdc2.git
-
+```console
+root@server:../git clone https://github.com/ernestosv73/siitdc2.git
+```
 ## Deploy de la topología
 ```console
 root@server:../siitdc2#clab deploy -t siitdc.yml
@@ -56,9 +56,9 @@ PC2:/#ping 192.168.0.80
 * La versión de Jool instalada en el contenedor SRVSIIT soporta los modos SIIT, Stateful NAT64 and MAP-T.
   
 ## Referencias
-https://containerlab.dev/
-https://www.jool.mx/en/eamt.html
-https://www.jool.mx/en/run-eam.html
+* https://containerlab.dev/
+* https://www.jool.mx/en/eamt.html
+* https://www.jool.mx/en/run-eam.html
 
 ## Author
 
