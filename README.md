@@ -34,6 +34,7 @@ root@server:../siitdc2#docker exec -it clab-siitdc2-PC2 /bin/bash
 ![Alt text](images/toposiitdc.png)
 
 ### Descripción de Contenedores
+* Contenedor Srl1: dispositivo Switch
 * Contenedor SRVSIIT: image docker Ubuntu 22.04. Jool version 4.2.0-rc2
 * Contenedor SRV1: image docker Ubuntu 22.04
 * Contenedor PC1 y PC2: image docker Alpine Linux
