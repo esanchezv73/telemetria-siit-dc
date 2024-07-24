@@ -4,7 +4,7 @@
 ## Descripción
 La siguiente topología integra un servidor SIIT-DC Jool a Containerlab, que permitirá realizar pruebas basadas en IPv4/IPv6 Translation
 
-### Requerimientos de software y SO
+## Requerimientos de software y SO
 
 Para desplegar la topología propuesta debe disponer de:
 
@@ -13,15 +13,15 @@ Para desplegar la topología propuesta debe disponer de:
 * Docker Engine - Community Version: 24.0.7
 * Containerlab version: 0.56.0
 
-### Instalación de los archivos de topología
+## Instalación de los archivos de topología
 
 * Clonar la topología ejecutando: git clone https://github.com/ernestosv73/siitdc2.git
 
-### Deploy de la topología
+## Deploy de la topología
 
 * Desde el directorio /siitdc2, ejecutar el comando: clab deploy -t siitdc.yml
 
-### Acceso a los nodos
+## Acceso a los nodos
 
 * Para acceder a CLI de cada nodo, ejecutar: 
 
@@ -31,8 +31,17 @@ Para desplegar la topología propuesta debe disponer de:
 * Nodo PC2:      docker exec -it clab-siitdc2-PC2 /bin/bash
 
 ## Descripción del ejemplo de prueba 
-La siguiente imagen muestra la topología creada
+### Topología creada
 ![Alt text](images/toposiitdc.png)
+
+### Descripción de Contenedores
+* Contenedor SRVSIIT: image docker Ubuntu 22.04. Jool version 4.2.0-rc2
+* Contenedor SRV1: image docker Ubuntu 22.04
+* Contenedor PC1 y PC2: image docker Alpine Linux
+* El detalle las configuraciones de red se encuentran en el archivo .yml
+
+### Descripción del ejemplo de prueba: Explicit Address Mappings Table - EAMT
+
 
 
 ## Author
