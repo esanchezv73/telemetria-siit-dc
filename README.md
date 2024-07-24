@@ -18,9 +18,8 @@ Para desplegar la topología propuesta debe disponer de:
 $ git clone https://github.com/ernestosv73/siitdc2.git
 
 ## Deploy de la topología
-
-$ cd /siitdc2
-$ clab deploy -t siitdc.yml
+```console
+user@server:../siitdc2#clab deploy -t siitdc.yml
 
 ## Acceso a los nodos
 
