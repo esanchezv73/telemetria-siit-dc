@@ -20,7 +20,7 @@ $ git clone https://github.com/ernestosv73/siitdc2.git
 ## Deploy de la topología
 ```console
 user@server:../siitdc2#clab deploy -t siitdc.yml
-
+```
 ## Acceso a los nodos
 
 * Para acceder a CLI de cada nodo, ejecutar: 
