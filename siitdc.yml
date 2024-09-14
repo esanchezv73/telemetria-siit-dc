@@ -23,7 +23,7 @@ topology:
     # router red ipv4 only
     rtinetipv4:
       kind: linux
-      image: quay.io/frrouting/frr:8.4.1
+      image: frrdhcp:latest
       binds:
         - rtinet4/daemons:/etc/frr/daemons
         - rtinet4/frr.conf:/etc/frr/frr.conf
