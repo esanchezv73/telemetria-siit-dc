@@ -73,9 +73,9 @@ topology:
       image: ghcr.io/hellt/network-multitool
       exec:
       - ip -6 route del default dev eth0
-      #- ip route del default dev eth0
+      - ip route del default dev eth0
       - ip addr add 192.168.1.10/24 dev eth1
-      - ip route add default via 192.168.1.1    
+      - ip route add default dev eth1  
       
   links:
     - endpoints: ["SRV1:eth1", "srl1:e1-1"]
