@@ -69,12 +69,12 @@ topology:
     # PC IPv4 only
     PC2:
       kind: linux
-      image: docker.io/wbitt/network-multitool:extra
+      image: ghcr.io/hellt/network-multitool
       exec:
       - ip -6 route del default dev eth0
-      - ip route del default dev eth0
-      - ip addr add 10.0.0.21/255.255.255.0 dev eth1
-      - ip route add default via 10.0.0.1    
+      #- ip route del default dev eth0
+      #- ip addr add 10.0.0.21/255.255.255.0 dev eth1
+      #- ip route add default via 10.0.0.1    
       
   links:
     - endpoints: ["SRV1:eth1", "srl1:e1-1"]
