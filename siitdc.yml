@@ -23,13 +23,13 @@ topology:
     # router red ipv4 only
     rtinetipv4:
       kind: linux
-      image: frrdhcp:latest
+      image: quay.io/frrouting/frr:8.4.1
       binds:
         - rtinet4/daemons:/etc/frr/daemons
         - rtinet4/frr.conf:/etc/frr/frr.conf
         
       exec:
-       #- "sysctl -w net.ipv6.conf.all.forwarding=1" 
+       - "sysctl -w net.ipv4.ip_forward=1" 
        - ip -6 route del default dev eth0
            
     # Servidor IPv6
