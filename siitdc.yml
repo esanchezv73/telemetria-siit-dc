@@ -20,6 +20,16 @@ topology:
        - "sysctl -w net.ipv6.conf.all.forwarding=1" 
        - ip -6 route del default dev eth0
      
+    # router red ipv4 only
+    rtinetipv4:
+      kind: linux
+      image: quay.io/frrouting/frr:8.4.1
+      binds:
+        - rtinetip4/daemons:/etc/frr/daemons
+        - rtinetip4/frr.conf:/etc/frr/frr.conf
+      exec:
+       #- "sysctl -w net.ipv6.conf.all.forwarding=1" 
+       - ip -6 route del default dev eth0
            
     # Servidor IPv6
     SRV1:
@@ -71,7 +81,8 @@ topology:
     - endpoints: ["rtinetipv6:eth1", "srl1:e1-2"]
     - endpoints: ["SRVSIIT:eth1", "srl1:e1-3"]
     - endpoints: ["rtinetipv6:eth2", "PC1:eth1"]
-    - endpoints: ["SRVSIIT:eth2", "PC2:eth1"]
+    - endpoints: ["SRVSIIT:eth2", "rtinetipv4:eth1"]
+    - endpoints: ["rtinetipv4:eth2", "PC2:eth1"]
  
     
      
