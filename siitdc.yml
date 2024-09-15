@@ -45,11 +45,16 @@ topology:
     SRVSIIT:
       kind: linux
       image: docker.io/esanchezv/siit-dcv2:latest
+      binds:
+       - configs/siitdc.sh:/root/siitdc.sh
       exec:
-       - ip -6 route del default dev eth0
-       
-       - ip -6 addr add 2001:db8:dc::2/64 dev eth1
-       
+       - chmod +x /root/siitdc.sh
+       - bash /root/siitdc.sh
+       - modprobe jool_siit
+       - jool_siit instance add "lacnic" --netfilter --pool6 64:ff9b::/96
+       - jool_siit -i "lacnic" eamt add 192.168.0.80/32 2001:db8:dc::50/128
+       - ip -6 route del default dev eth0       
+       - ip -6 addr add 2001:db8:dc::2/64 dev eth1       
        - ip addr add 10.0.0.2/24 dev eth2
        
        
