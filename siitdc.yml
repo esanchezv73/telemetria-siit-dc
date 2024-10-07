@@ -34,7 +34,7 @@ topology:
       kind: linux
       image: esanchezv/srvhttps:latest
       binds:
-       #- configs/serverweb.sh:/root/serverweb.sh
+       - configs/serverweb.sh:/root/serverweb.sh
        - configs/web-server.html:/var/www/localhost/htdocs/index.html
       exec:
       #- chmod +x /root/serverweb.sh
