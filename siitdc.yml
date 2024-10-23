@@ -35,8 +35,8 @@ topology:
       image: esanchezv/srvhttps:latest
       binds:
        - configs/serverweb.sh:/root/serverweb.sh
-       - configs/web-server.html:/var/www/localhost/htdocs/index.html
-       - configs/web-server.html:/var/www/localhost/htdocs/index.html
+       #- configs/web-server.html:/var/www/localhost/htdocs/index.html
+       - configs/srl-elk-lab-main.zip:/var/www/localhost/htdocs/srl-elk-lab-main.zip
       exec:
       #- chmod +x /root/serverweb.sh
       #- bash /root/serverweb.sh
