@@ -3,19 +3,19 @@ name: ids-siitdc
   
 topology:
   nodes:
-    # switch Nokia SRL
+    # switch Nokia SRL DC
     srl1:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.10.1
       type: ixrd3
-      #startup-config: srlsw/config.json
+      startup-config: srlsw/switch-dc.cfg
 
     # switch Nokia SRL LAN ipv4
     srl2:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.10.1
       type: ixrd3
-      #startup-config: srlsw/config.json
+      startup-config: srlsw/switch-lan.cfg
       
     # router red ipv6 only
     rtinetipv6:
