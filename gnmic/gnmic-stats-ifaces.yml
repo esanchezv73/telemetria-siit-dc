@@ -5,8 +5,8 @@ skip-verify: true
 timeout: 10s
 
 targets:
-  srlswitch:
-    address: srlswitch:57400
+  switch-lan:
+    address: switch-lan:57400
 
 subscriptions:    
   srl-if-stats:
