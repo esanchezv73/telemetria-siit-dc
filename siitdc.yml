@@ -8,7 +8,7 @@ topology:
     ciscort:
       kind: cisco_iol
       image: docker.io/arthurk99/cisco-iol:17.15.01 
-      startup-config: config/core/config.partial
+      startup-config: core/config.partial
     
     # switch Nokia SRL DC
     switch-dc:
