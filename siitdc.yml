@@ -1,10 +1,15 @@
 name: ids-siitdc
 mgmt:
   network: custom_mgmt              # management network name
-  ipv4-subnet: 172.20.20.0/24       # ipv4 range
+  ipv4-subnet: 172.80.80.0/24       # ipv4 range
   
 topology:
   nodes:
+    ciscort:
+      kind: cisco_iol
+      image: docker.io/arthurk99/cisco-iol:17.15.01 
+      startup-config: config/core/config.partial
+    
     # switch Nokia SRL DC
     switch-dc:
       kind: nokia_srlinux
@@ -19,17 +24,49 @@ topology:
       type: ixrd3
       startup-config: srlsw/switch-lan.cfg
       
-    # router red ipv6 only
-    rtinetipv6:
+         
+    # TELEMETRIA STACK
+    prometheus:
       kind: linux
-      image: quay.io/frrouting/frr:8.4.1
+      mgmt-ipv4: 172.80.80.42
+      image: quay.io/prometheus/prometheus:v2.54.1
       binds:
-        - rtinetipv6/daemons:/etc/frr/daemons
-        - rtinetipv6/frr.conf:/etc/frr/frr.conf
-      exec:
-       - "sysctl -w net.ipv6.conf.all.forwarding=1" 
-       - ip -6 route del default dev eth0
-     
+        - config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      cmd: --config.file=/etc/prometheus/prometheus.yml
+      ports:
+        - 9090:9090
+
+    grafana:
+      kind: linux
+      mgmt-ipv4: 172.80.80.43
+      image: grafana/grafana:latest
+      binds:
+        - config/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - config/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        #- config/grafana/dashboards:/var/lib/grafana/dashboards
+      ports:
+        - 3000:3000
+      env:        
+        # env vars to enable anonymous access
+        GF_ORG_ROLE: "Admin"
+        GF_ORG_NAME: "Main Org"
+        GF_AUTH_ANONYMOUS_ENABLED: "true"
+        GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+        GF_AUTH_ANONYMOUS: "true"
+        GF_AUTH_OAUTH_AUTO_LOGIN: "true"
+    
+    gNMIc:
+      kind: linux
+      image: docker.io/esanchezv/hellt-gnmic:latest
+      binds:
+        - config/python_scapy.sh:/root/python_scapy.sh
+        - config/gnmic/gnmic-config.yml:/gnmic-config.yml:ro
+        - config/gnmic/gnmic-stats-ifaces.yml:/gnmic-stats-ifaces.yml:ro
+      exec: 
+        - mkdir /data
+        - chmod +x /data
+        - chmod +x /root/python_scapy.sh
+        - bash /root/python_scapy.sh   
     
     # Servidor IPv6
     SRV1:
@@ -68,61 +105,14 @@ topology:
        - "sysctl -w net.ipv4.ip_forward=1"
        - "sysctl -w net.ipv6.conf.all.forwarding=1"
        
-    ntopng:
-      kind: linux
-      mgmt-ipv4: 172.20.20.9 
-      image: ntopng-ntopng:latest
-      binds:
-       #- ./config/ntopng.conf:/etc/ntopng/ntopng.conf        
-       - /home/ernesto/ntopng/data/ntopng:/var/lib/ntopng
-      cmd: "--community -d /var/lib/ntopng -r 127.0.0.1:6379@0 -w 0.0.0.0:3000 -i eth1 -i syslog://*:9999"
-      exec:
-      #- ip -6 route del default dev eth0
-       - "sysctl -w net.ipv6.conf.eth1.accept_ra=0"
-       - ip -6 addr add 2001:db8:dc::11/64 dev eth1
-       - ip -6 route add default dev eth1 
-      ports: 
-      - 3000:3000/tcp
       
-    ntopng-redis:
-      kind: linux
-      image: redis:alpine
-      binds:
-       - /home/ernesto/ntopng/data/redis:/data
-      cmd: "--save 900 1" 
-      #exec:
-      #- ip -6 route del default dev eth0
-      ports: 
-      - 6379:6379/tcp
-
-    suricata:
-      kind: linux
-      mgmt-ipv4: 172.20.20.10 
-      image: docker.io/esanchezv/suricatafilebeatv1:v2
-      binds:
-       - config/local.rules:/var/lib/suricata/rules/local.rules
-       - config/rsyslog.conf:/etc/rsyslog.conf
-      exec:
-      #- ip -6 route del default dev eth0
-      - "sysctl -w net.ipv6.conf.eth1.accept_ra=0"
-      - ip -6 addr add 2001:db8:20::10/64 dev eth1
-      - ip -6 route add default dev eth1  
-    
-    # PC IPv6only
-    PC1:
-      kind: linux
-      image: esanchezv/kaliipv6v2.1:latest
-      exec:
-      - ip -6 route del default dev eth0  
-      - ip -6 addr add 2001:db8::20/64 dev eth1
-      - ip -6 route add default via 2001:db8::1
     
     # PC IPv4 only
     PC2:
       kind: linux
       image: ghcr.io/hellt/network-multitool
       exec:
-      - ip -6 route del default dev eth0
+      #- ip -6 route del default dev eth0
       - ip route del default dev eth0
       - ip addr add 10.0.0.10/24 dev eth1
       - ip route add 0.0.0.0/0 via 10.0.0.2  
@@ -138,13 +128,12 @@ topology:
       
   links:
     - endpoints: ["SRV1:eth1", "switch-dc:e1-1"]
-    - endpoints: ["rtinetipv6:eth1", "switch-dc:e1-2"]
     - endpoints: ["SRVSIIT:eth1", "switch-dc:e1-3"]
-    - endpoints: ["ntopng:eth1", "switch-dc:e1-4"]
-    - endpoints: ["rtinetipv6:eth2", "PC1:eth1"]
     - endpoints: ["SRVSIIT:eth2", "switch-lan:e1-1"]
-    - endpoints: ["PC2:eth1", "switch-lan:e1-2"]
-    - endpoints: ["PC3:eth1", "switch-lan:e1-3"]
+    - endpoints: ["ciscort:Ethernet0/1", "switch-lan:e1-2"]
+    - endpoints: ["gNMIc:eth1", "switch-lan:e1-3"]
+    - endpoints: ["PC2:eth1", "switch-lan:e1-4"]
+    - endpoints: ["PC3:eth1", "switch-lan:e1-5"]
     
  
     
