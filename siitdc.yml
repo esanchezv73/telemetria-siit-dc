@@ -111,20 +111,11 @@ topology:
     PC2:
       kind: linux
       image: ghcr.io/hellt/network-multitool
-      exec:
-      #- ip -6 route del default dev eth0
-      - ip route del default dev eth0
-      - ip addr add 10.0.0.10/24 dev eth1
-      - ip route add 0.0.0.0/0 via 10.0.0.2  
-
+      
     PC3:
       kind: linux
       image: ghcr.io/hellt/network-multitool
-      exec:
-      - ip -6 route del default dev eth0
-      - ip route del default dev eth0
-      - ip addr add 10.0.0.11/24 dev eth1
-      - ip route add 0.0.0.0/0 via 10.0.0.2    
+     
       
   links:
     - endpoints: ["SRV1:eth1", "switch-dc:e1-1"]
