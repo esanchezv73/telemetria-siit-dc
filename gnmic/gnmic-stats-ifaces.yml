@@ -14,8 +14,8 @@ subscriptions:
     stream-mode: sample
     sample-interval: 5s
     paths:
-      - /interface[name=ethernet-1/3]/statistics/in-broadcast-packets
-      - /interface[name=ethernet-1/3]/statistics/in-error-packets
+      - /interface[name=ethernet-1/1]/statistics/in-broadcast-packets
+      - /interface[name=ethernet-1/1]/statistics/in-error-packets
       - /interface[name=ethernet-1/4]/statistics/in-broadcast-packets
       - /interface[name=ethernet-1/4]/statistics/in-error-packets
       - /interface[name=ethernet-1/5]/statistics/in-broadcast-packets
