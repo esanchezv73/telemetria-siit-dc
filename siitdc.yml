@@ -79,7 +79,7 @@ topology:
       exec:
       #- ip -6 route del default dev eth0
        - "sysctl -w net.ipv6.conf.eth1.accept_ra=0"
-       - ip -6 addr add 2001:db8:20::11/64 dev eth1
+       - ip -6 addr add 2001:db8:dc::11/64 dev eth1
        - ip -6 route add default dev eth1 
       ports: 
       - 3000:3000/tcp
@@ -129,6 +129,7 @@ topology:
     - endpoints: ["SRV1:eth1", "switch-dc:e1-1"]
     - endpoints: ["rtinetipv6:eth1", "switch-dc:e1-2"]
     - endpoints: ["SRVSIIT:eth1", "switch-dc:e1-3"]
+    - endpoints: ["ntopng:eth1", "switch-dc:e1-4"]
     - endpoints: ["rtinetipv6:eth2", "PC1:eth1"]
     - endpoints: ["SRVSIIT:eth2", "switch-lan:e1-1"]
     - endpoints: ["PC2:eth1", "switch-lan:e1-2"]
