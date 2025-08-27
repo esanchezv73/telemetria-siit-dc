@@ -4,14 +4,14 @@ name: ids-siitdc
 topology:
   nodes:
     # switch Nokia SRL DC
-    srl1:
+    switch-dc:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.10.1
       type: ixrd3
       startup-config: srlsw/switch-dc.cfg
 
     # switch Nokia SRL LAN ipv4
-    srl2:
+    switch-lan:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.10.1
       type: ixrd3
@@ -97,13 +97,13 @@ topology:
       - ip route add 0.0.0.0/0 via 10.0.0.2    
       
   links:
-    - endpoints: ["SRV1:eth1", "srl1:e1-1"]
-    - endpoints: ["rtinetipv6:eth1", "srl1:e1-2"]
-    - endpoints: ["SRVSIIT:eth1", "srl1:e1-3"]
+    - endpoints: ["SRV1:eth1", "switch-dc:e1-1"]
+    - endpoints: ["rtinetipv6:eth1", "switch-dc:e1-2"]
+    - endpoints: ["SRVSIIT:eth1", "switch-dc:e1-3"]
     - endpoints: ["rtinetipv6:eth2", "PC1:eth1"]
-    - endpoints: ["SRVSIIT:eth2", "srl2:e1-1"]
-    - endpoints: ["PC2:eth1", "srl2:e1-2"]
-    - endpoints: ["PC3:eth1", "srl2:e1-3"]
+    - endpoints: ["SRVSIIT:eth2", "switch-lan:e1-1"]
+    - endpoints: ["PC2:eth1", "switch-lan:e1-2"]
+    - endpoints: ["PC3:eth1", "switch-lan:e1-3"]
     
  
     
