@@ -111,6 +111,8 @@ topology:
     PC2:
       kind: linux
       image: docker.io/esanchezv/kaliipv6v2.2:latest
+      exec:
+       - apt -y install t50    
       
     PC3:
       kind: linux
