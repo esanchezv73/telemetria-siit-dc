@@ -110,11 +110,11 @@ topology:
     # PC IPv4 only
     PC2:
       kind: linux
-      image: ghcr.io/hellt/network-multitool
+      image: docker.io/esanchezv/kaliipv6v2.2:latest
       
     PC3:
       kind: linux
-      image: ghcr.io/hellt/network-multitool
+      image: docker.io/esanchezv/kaliipv6v2.2:latest
      
       
   links:
