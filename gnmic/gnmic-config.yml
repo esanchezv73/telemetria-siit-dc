@@ -15,6 +15,14 @@ subscriptions:
     sample-interval: 5s
     paths:
       - /platform/control[slot=*]/cpu[index=all]/total
+
+  srl-if-stats:
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+    paths:
+      - /interface[name=ethernet-1/*]/statistics
+      - /interface[name=ethernet-1/*]/traffic-rate    
       
 outputs:
   
