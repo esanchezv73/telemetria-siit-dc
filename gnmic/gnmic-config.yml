@@ -21,9 +21,10 @@ subscriptions:
     stream-mode: sample
     sample-interval: 5s
     paths:
-      - /interface[name=ethernet-1/*]/statistics
-      - /interface[name=ethernet-1/*]/traffic-rate    
-      
+      - /interface[name=ethernet-1/*]/statistics/in-broadcast-packets
+      - /interface[name=ethernet-1/*]/statistics/in-error-packets
+      - /interface[name=ethernet-1/*]/traffic-rate
+            
 outputs:
   
   prom-output:
