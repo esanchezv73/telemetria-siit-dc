@@ -69,7 +69,7 @@ topology:
         - bash /root/python_scapy.sh   
     
     # Servidor IPv6
-    SRV1:
+    webserver:
       kind: linux
       image: esanchezv/srvhttps:latest
       binds:
@@ -122,7 +122,7 @@ topology:
      
       
   links:
-    - endpoints: ["SRV1:eth1", "switch-dc:e1-1"]
+    - endpoints: ["webserver:eth1", "switch-dc:e1-1"]
     - endpoints: ["SRVSIIT:eth1", "switch-dc:e1-3"]
     - endpoints: ["SRVSIIT:eth2", "switch-lan:e1-1"]
     - endpoints: ["ciscort:Ethernet0/1", "switch-lan:e1-2"]
