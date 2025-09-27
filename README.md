@@ -1,8 +1,7 @@
-# SIIT-DC based in Containerlab
-  Stateless IP/ICMP Translator 
-
+# Stack de Telemetría en un entorno SIIT-DC con Containerlab
+  
 ## Descripción
-La siguiente topología integra un servidor SIIT-DC Jool a Containerlab, que permitirá realizar pruebas basadas en IPv4/IPv6 Translation
+La siguiente topología integra un servidor SIIT-DC Jool a Containerlab, y un Stack de Telemetría que permitirá realizar pruebas basadas en IPv4/IPv6 Translation
 
 ## Requerimientos de software y SO
 
