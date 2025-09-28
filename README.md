@@ -16,11 +16,19 @@ clab deploy -t tele-siitdc.yml
 
 ```console
 docker exec -it clab-telemetria-siitdc-gNMIc /bin/bash
-suscripción a métricas, ejecutar: gnmic subscribe --config /gnmic-config.yml
-docker exec -it clab-siitdc2-SRV1 /bin/bash
-docker exec -it clab-siitdc2-PC1 /bin/bash
-docker exec -it clab-siitdc2-PC2 /bin/bash
 ```
+suscripción a métricas, ejecutar:
+```console
+gnmic subscribe --config /gnmic-config.yml
+```
+```console
+docker exec -it clab-telemetria-siitdc-webserver /bin/bash
+```
+```console
+docker exec -it clab-telemetria-siitdc-PC2 /bin/bash
+docker exec -it clab-telemetria-siitdc-PC3 /bin/bash
+```
+En los nodos PC2 y PC3 eliminar ruta por defecto en eth0 y ejecutar cliente dhcp con dhclient eth1
 ## Descripción del ejemplo de prueba 
 ### Topología creada
 ![Alt text](images/toposiitdc.png)
