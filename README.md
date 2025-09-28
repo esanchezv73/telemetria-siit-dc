@@ -31,33 +31,15 @@ docker exec -it clab-telemetria-siitdc-PC2 /bin/bash
 docker exec -it clab-telemetria-siitdc-PC3 /bin/bash
 ```
 Eliminar ruta por defecto en eth0: `ip route del default dev eth0` y ejecutar cliente dhcp con `dhclient eth1`
-
-
-
-
-### Descripción de Contenedores
-* Contenedor Srl1: dispositivo Switch
-* Contenedor SRVSIIT: image docker Ubuntu 22.04. Jool version 4.2.0-rc2
-* Contenedor SRV1: image docker Ubuntu 22.04
-* Contenedor PC1 y PC2: image docker Alpine Linux
-* El detalle las configuraciones de red se encuentran en el archivo .yml
-
-### Descripción del ejemplo de prueba: Explicit Address Mappings Table - EAMT
-
-* El siguiente ejemplo muestra un caso de implementación de un servidor Jool en modo SIIT para permitir conexión de un cliente IPv4 a un Servidor IPv6 a nivel de capa 3:
-* Desde el contenedor SRVSIIT ejecutar los siguientes comandos:
-```console
-root@SRVSIIT:/#modprobe jool_siit
-root@SRVSIIT:/#jool_siit instance add "lacnic" --netfilter --pool6 64:ff9b::/96
-root@SRVSIIT:/#jool_siit -i "lacnic" eamt add 192.168.0.80/32 2001:db8:dc::50/128
-```
-* Desde el contenedor PC2 probar que se tiene conectividad al servidor SRV1 ejecutando:
-```console
-PC2:/#ping 192.168.0.80
-```
-## Notas
-* La versión de Jool instalada en el contenedor SRVSIIT soporta los modos SIIT, Stateful NAT64 and MAP-T.
-  
+Comprobar acceso al servidor web ejecutando solicitud HTTP: `wget http://192.168.0.80`
+#### Acceso al Dashboard Grafana
+* Desde navegador en host local a la url: `http://ip-hostlocal:3000`
+## Ejemplos ataques
+### Flooding tool. From https://www.kali.org/tools/t50/
+>***atk6-flood_advertise6:** Flood the target /64 network with ICMPv6 NA messages random IPv6 link local address.
+* Desde **PC1**
+  *  Lanzar el ataque ejecutando: `atk6-flood_advertise6 eth1`
+  *  Ataque mitigado por ACL IPv6 bindings permitidos. Visualización en Dashboard Matched Packets por ACL Entry.
 ## Referencias
 * https://containerlab.dev/
 * https://www.jool.mx/en/eamt.html
