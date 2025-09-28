@@ -1,21 +1,13 @@
 # Stack de Telemetría en un entorno SIIT-DC con Containerlab
   
 ## Descripción
-La siguiente topología integra un servidor SIIT-DC Jool a Containerlab, y un Stack de Telemetría que permitirá realizar pruebas basadas en IPv4/IPv6 Translation
+La topología creada provee un laboratorio de pruebas para el análisis de seguridad mediante un Stack de Telemetría en un entorno de red IPv4/IPv6 basado en SIIT-DC 
 
-## Requerimientos de software y SO
+## Descripción Stack de Telemetría
+Permite suscripción a métricas ACLs match packets, broadcast packets y consumo de CPU recibidas desde un dispositivo Nokia SRL vía gNMI. 
+* Nodo colector gNMIc Openconfig, recibe y exporta a Stack Prometheus/Grafana  
 
-Para desplegar la topología propuesta debe disponer de:
-
-* Dispositivo Host con Containerlab instalado:
-* Sistema Operativo Linux "Ubuntu 22.04.3 LTS". Kernel headers 5.15.0-116-generic
-* Docker Engine - Community Version: 24.0.7
-* Containerlab version: 0.56.0
-
-## Instalación de los archivos de topología
-```console
-root@server:../git clone https://github.com/ernestosv73/siitdc2.git
-```
+``
 ## Deploy de la topología
 ```console
 root@server:../siitdc2#clab deploy -t siitdc.yml
