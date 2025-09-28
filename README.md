@@ -52,7 +52,10 @@ Comprobar acceso al servidor web ejecutando solicitud HTTP: `wget http://192.168
 >***Ataque de inundación mediante envío de paquetes a dirección broadcast desde dirección IP válida** 
 * Desde **PC3**
   *  Lanzar el ataque ejecutando: `t50 -s 10.0.0.4 10.0.0.255 --flood`
-  *  No mitigable por ACL. Detectado por suscripción a métrica Multicast Packets por Interface y visualización en Grafana.    
+  *  No mitigable por ACL. Detectado por suscripción a métrica Multicast Packets por Interface y visualización en Grafana.
+
+## Referencias
+https://github.com/srl-labs/srl-telemetry-lab
 
 ## Author
 MSc. Ernesto Sánchez. 
