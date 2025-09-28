@@ -2,6 +2,8 @@
   
 ## Descripción
 La topología creada provee un laboratorio de pruebas para el análisis de seguridad mediante un Stack de Telemetría en un entorno de red IPv4/IPv6 basado en SIIT-DC 
+### Topología creada
+![Alt text](images/red.png)
 
 ## Descripción Stack de Telemetría
 Permite suscripción a métricas ACLs match packets, broadcast packets y consumo de CPU recibidas desde un dispositivo Nokia SRL vía gNMI. 
@@ -30,9 +32,8 @@ docker exec -it clab-telemetria-siitdc-PC3 /bin/bash
 ```
 Eliminar ruta por defecto en eth0: `ip route del default dev eth0` y ejecutar cliente dhcp con `dhclient eth1`
 
-## Descripción del ejemplo de prueba 
-### Topología creada
-![Alt text](images/toposiitdc.png)
+
+
 
 ### Descripción de Contenedores
 * Contenedor Srl1: dispositivo Switch
