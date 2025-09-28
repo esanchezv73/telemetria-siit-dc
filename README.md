@@ -10,15 +10,16 @@ Permite suscripción a métricas ACLs match packets, broadcast packets y consumo
 ``
 ## Deploy de la topología
 ```console
-root@server:../siitdc2#clab deploy -t siitdc.yml
+clab deploy -t tele-siitdc.yml
 ```
 ## Acceso a los nodos
 
 ```console
-root@server:../siitdc2#docker exec -it clab-siitdc2-SRVSIIT /bin/bash
-root@server:../siitdc2#docker exec -it clab-siitdc2-SRV1 /bin/bash
-root@server:../siitdc2#docker exec -it clab-siitdc2-PC1 /bin/bash
-root@server:../siitdc2#docker exec -it clab-siitdc2-PC2 /bin/bash
+docker exec -it clab-telemetria-siitdc-gNMIc /bin/bash
+suscripción a métricas, ejecutar: gnmic subscribe --config /gnmic-config.yml
+docker exec -it clab-siitdc2-SRV1 /bin/bash
+docker exec -it clab-siitdc2-PC1 /bin/bash
+docker exec -it clab-siitdc2-PC2 /bin/bash
 ```
 ## Descripción del ejemplo de prueba 
 ### Topología creada
