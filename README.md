@@ -36,26 +36,20 @@ Comprobar acceso al servidor web ejecutando solicitud HTTP: `wget http://192.168
 * Desde navegador en host local a la url: `http://ip-hostlocal:3000`
 ## Ejemplos ataques
 ### Flooding tool. From https://www.kali.org/tools/t50/
->***atk6-flood_advertise6:** Flood the target /64 network with ICMPv6 NA messages random IPv6 link local address.
-* Desde **PC1**
-  *  Lanzar el ataque ejecutando: `atk6-flood_advertise6 eth1`
-  *  Ataque mitigado por ACL IPv6 bindings permitidos. Visualización en Dashboard Matched Packets por ACL Entry.
-## Referencias
-* https://containerlab.dev/
-* https://www.jool.mx/en/eamt.html
-* https://www.jool.mx/en/run-eam.html
+>***Ataque de DoS hacia Servidor SIIT-DC por inundación de mensajes desde IPs origen randómicas** 
+* Desde **PC2**
+  *  Lanzar el ataque ejecutando: `t50 10.0.0.2 --flood`
+  *  Ataque mitigado por ACL IPv4 block spoofing. Visualización en Dashboard Matched Packets por ACL Entry.
+>***Ataque de inundación mediante envío de paquetes a dirección broadcast desde dirección IP válida** 
+* Desde **PC3**
+  *  Lanzar el ataque ejecutando: `t50 -s 10.0.0.4 10.0.0.255 --flood`
+  *  No mitigable por ACL. Detectado por suscripción a métrica Multicast Packets por Interface y visualización en Grafana.    
 
 ## Author
-
 MSc. Ernesto Sánchez. 
-
-mail: esanchez@ucasal.edu.ar
-
-linkedin: https://www.linkedin.com/in/ernestos%C3%A1nchez
-
+linkedin: https://www.linkedin.com/in/ernestosanchez73
 
 ## License
-
 This project is licensed under the [MIT] License - see the LICENSE.txt file for details
 
 
