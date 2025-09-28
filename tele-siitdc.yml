@@ -71,7 +71,7 @@ topology:
     # Servidor IPv6
     webserver:
       kind: linux
-      image: esanchezv/srvhttps:latest
+      image: docker.io/esanchezv/srvhttps:latest
       binds:
        - configs/serverweb.sh:/root/serverweb.sh
        - configs/web-server.html:/var/www/localhost/htdocs/index.html
