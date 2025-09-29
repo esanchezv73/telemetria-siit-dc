@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -61,7 +61,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "dashed"
             }
           },
           "mappings": [],
@@ -72,11 +72,16 @@
                 "color": "green"
               },
               {
+                "color": "#EAB839",
+                "value": 2000
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 4000
               }
             ]
-          }
+          },
+          "unit": "pps"
         },
         "overrides": []
       },
@@ -94,6 +99,9 @@
           "placement": "bottom",
           "showLegend": true
         },
+        "timezone": [
+          "America/Argentina/Buenos_Aires"
+        ],
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
@@ -247,6 +255,8 @@
             }
           },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "percentage",
             "steps": [
@@ -254,11 +264,16 @@
                 "color": "green"
               },
               {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 90
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -315,5 +330,5 @@
   "timezone": "browser",
   "title": "Telemetria DC",
   "uid": "94c02041-448e-48ff-94eb-0d35f47d2b2a",
-  "version": 6
+  "version": 1
 }
